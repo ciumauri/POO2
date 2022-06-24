@@ -87,22 +87,43 @@ public class DaoVeiculo {
         return qtde;
     }
 
-    public int editar(Veiculo v) {
+    public Veiculo consultar(int cod) {
+        Veiculo v = null;
+        try {
+            this.conectar();
+            ResultSet rs = st.executeQuery("select * from tb_veiculos"
+                    + " where codigo = " + cod + ";");
+            if (rs.next()) {
+                v = new Veiculo();
+                v.setCodigo(rs.getInt("codigo"));
+                v.setMarca(rs.getString("marca"));
+                v.setModelo(rs.getString("modelo"));
+                v.setChassi(rs.getString("chassi"));
+                v.setAno(rs.getInt("ano"));
+            }
+        } catch (Exception e) {
+            System.out.println("Erro..." + e.getMessage());
+        } finally {
+            this.desconectar();
+        }
+        return v;
+    }
+
+    public int alterar(Veiculo v) {
         int qtde = 0;
         try {
             this.conectar();
-            String comando = "update tb_veiculos set marca = ?, modelo = ?, chassi = ?, ano = ?," + "where codigo = ?" + ";";
+            String comando = "update tb_veiculos set marca = '"
+                    + v.getMarca() + "', modelo = '"
+                    + v.getModelo() + "', chassi = '"
+                    + v.getChassi() + "', ano = "
+                    + v.getAno() + " where codigo = "
+                    + v.getCodigo() + ";";
             st.executeUpdate(comando);
             qtde = st.getUpdateCount();
-            st.
-
-
-
-
-
         } catch (Exception e) {
-            System.out.println("Erro... " + e.getMessage());
-        }finally{
+            System.out.println("Erro..." + e.getMessage());
+        } finally {
             this.desconectar();
         }
         return qtde;
