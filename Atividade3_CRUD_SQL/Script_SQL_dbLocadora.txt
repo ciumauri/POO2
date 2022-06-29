@@ -1,0 +1,24 @@
+create database dblocadora;
+use dblocadora;
+CREATE TABLE `tb_veiculos` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `marca` varchar(30) NOT NULL,
+  `modelo` varchar(40) NOT NULL,
+  `chassi` varchar(30) NOT NULL,
+  `ano` int NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `tb_clientes` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `telefone` varchar(30) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `endereco` varchar(100) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+show tables;
+select * from tb_veiculos;
+select * from tb_clientes;

@@ -35,8 +35,8 @@ public class DaoCliente {
             this.conectar();
             String comando = "INSERT INTO tb_clientes VALUES (NULL, '"
                     + c.getNome() + "', '" + c.getEmail() + "', '"
-                    + c.getFone() + "', " + c.getCpf() + ");";
-
+                    + c.getFone() + "', '" + c.getCpf() + "', '" 
+                    + c.getEndereco() + "');";
             // System.out.println(comando);
             st.executeUpdate(comando);
             resultado = true;
@@ -61,7 +61,7 @@ public class DaoCliente {
                 c.setEmail(rs.getString("email"));
                 c.setFone(rs.getString("telefone"));
                 c.setCpf(rs.getString("cpf"));
-
+                c.setEndereco(rs.getString("endereco"));
                 resultados.add(c);
             }
         } catch (Exception e) {
@@ -87,22 +87,47 @@ public class DaoCliente {
         return qtde;
     }
 
-    public int editar(int cod) {
+    public Cliente consultar(int cod) {
+        Cliente c = null;
+        try {
+            this.conectar();
+            ResultSet rs = st.executeQuery("select * from tb_clientes"
+                    + " where codigo = " + cod + ";");
+            if (rs.next()) {
+                c = new Cliente();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setNome(rs.getString("nome"));
+                c.setEmail(rs.getString("email"));
+                c.setFone(rs.getString("telefone"));
+                c.setCpf(rs.getString("cpf"));
+                c.setEndereco(rs.getString("endereco"));
+            }
+        } catch (Exception e) {
+            System.out.println("Erro..." + e.getMessage());
+        } finally {
+            this.desconectar();
+        }
+        return c;
+    }
+
+    public int alterar(Cliente c) {
         int qtde = 0;
         try {
             this.conectar();
-            String comando = "update from tb_clientes where codigo = " + cod + ";";
+            String comando = "update tb_clientes set nome = '"
+                    + c.getNome() + "', email = '" 
+                    + c.getEmail() + "', telefone = '" 
+                    + c.getFone() + "', cpf = '" 
+                    + c.getCpf() + "', endereco = '" 
+                    + c.getEndereco() + "' where codigo = " 
+                    + c.getCodigo() + ";";
             st.executeUpdate(comando);
             qtde = st.getUpdateCount();
         } catch (Exception e) {
-            System.out.println("Erro... " + e.getMessage());
+            System.out.println("Erro..." + e.getMessage());
         } finally {
             this.desconectar();
         }
         return qtde;
-    }
-
-    public boolean editar(Cliente cliente) {
-        return false;
-    }
+    }    
 }

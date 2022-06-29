@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Locadora",
+            "request": "launch",
+            "mainClass": "Locadora",
+            "projectName": "ex_aula7_CRUD_f87bfe2f"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
