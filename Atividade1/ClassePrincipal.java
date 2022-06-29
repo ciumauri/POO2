@@ -47,9 +47,6 @@ public class ClassePrincipal {
     public void cadastrarCliente() {
         System.out.println("\n---------------------------------------");
         System.out.println("CADASTRO DE CLIENTE");
-        System.out.println("Informe o código do cliente: ");
-        cliente.setCodigo(Integer.parseInt(sc.nextLine()));
-        ;
         System.out.println("Informe o nome do cliente: ");
         cliente.setNome(sc.nextLine());
         System.out.println("Informe o telefone do cliente: ");
@@ -66,8 +63,7 @@ public class ClassePrincipal {
         System.out.println("\n---------------------------------------");
         System.out.println("[Listagem de Clientes]");
         for (Cliente cliente : clientes) {
-            System.out.println(cliente.getCodigo() + " - " + cliente.getNome() + " - " + cliente.getTelefone() + " - "
-                    + cliente.getCpf());
+            System.out.println(cliente.getNome() + " - " + cliente.getTelefone() + " - " + cliente.getCpf());
         }
         System.out.println("\n---------------------------------------");
     }
@@ -100,12 +96,13 @@ public class ClassePrincipal {
     public void consultarOrcamento() {
         System.out.println("\n---------------------------------------");
         System.out.println("CONSULTA DE ORÇAMENTO");
-        System.out.println("Informe o código do orçamento: ");
-        orcamento.setCodigo(Integer.parseInt(sc.nextLine()));
+        System.out.println("Informe o cpf do cliente: ");
+        cliente.setCpf(sc.nextLine());
         for (Orcamento orcamento : orcamentos) {
             if (orcamento.getCodigo() == orcamento.getCodigo()) {
-                System.out.println("Código: " + orcamento.getCodigo());
-                System.out.println("Descrição: " + orcamento.getDescricao());
+                System.out.println("Cliente: " + cliente.getNome());
+                System.out.println("Código do Orçamento: " + orcamento.getCodigo());
+                System.out.println("Descrição do Orçamento: " + orcamento.getDescricao());
                 System.out.println("Data: " + orcamento.getData());
                 System.out.println("Valor: " + orcamento.getValor());
             } else {
